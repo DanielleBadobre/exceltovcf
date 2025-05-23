@@ -145,7 +145,7 @@ const ExcelToVCFConverter = () => {
         // Multiple phone fields
         contact.phones = [];
         if (mapping.phone1 !== undefined && row[mapping.phone1]) {
-          contact.phones.push({ type: 'TEL', value: row[mapping.phone1] });
+          contact.phones.push({ type: 'TEL;TYPE=CELL', value: row[mapping.phone1] });
         }
         if (mapping.phone2 !== undefined && row[mapping.phone2]) {
           contact.phones.push({ type: 'TEL;TYPE=WORK', value: row[mapping.phone2] });
