@@ -145,13 +145,13 @@ const ExcelToVCFConverter = () => {
         // Multiple phone fields
         contact.phones = [];
         if (mapping.phone1 !== undefined && row[mapping.phone1]) {
-          contact.phones.push({ type: 'TEL;TYPE=CELL', value: formatPhoneNumber(row[mapping.phone1]) });
+          contact.phones.push({ type: 'TEL', value: row[mapping.phone1] });
         }
         if (mapping.phone2 !== undefined && row[mapping.phone2]) {
-          contact.phones.push({ type: 'TEL;TYPE=WORK', value: formatPhoneNumber(row[mapping.phone2]) });
+          contact.phones.push({ type: 'TEL;TYPE=WORK', value: row[mapping.phone2] });
         }
         if (mapping.phone3 !== undefined && row[mapping.phone3]) {
-          contact.phones.push({ type: 'TEL;TYPE=HOME', value: formatPhoneNumber(row[mapping.phone3]) });
+          contact.phones.push({ type: 'TEL;TYPE=HOME', value: row[mapping.phone3] });
         }
         
         // Other fields
@@ -273,9 +273,6 @@ const ExcelToVCFConverter = () => {
       `);
     }
   };
-  const formatPhoneNumber = (phone) => {
-    return phone.toString().replace(/[^\d+]/g, ''); // Keeps only digits and '+'
-  };
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
@@ -337,21 +334,21 @@ const ExcelToVCFConverter = () => {
 
             {/* Sheet Selection */}
             <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold flex items-center gap-2">
+              <div className="mb-4">
+                <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
                   <Users className="w-5 h-5" />
                   Sélectionner les feuilles à convertir
                 </h2>
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <button
                     onClick={() => setSelectedSheets(new Set(sheets.map(s => s.name)))}
-                    className="px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-md transition-colors"
+                    className="flex-1 px-3 py-2 text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-md transition-colors text-center"
                   >
                     Tout sélectionner
                   </button>
                   <button
                     onClick={() => setSelectedSheets(new Set())}
-                    className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md transition-colors"
+                    className="flex-1 px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md transition-colors text-center"
                   >
                     Tout désélectionner
                   </button>
